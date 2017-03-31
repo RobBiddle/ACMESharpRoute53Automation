@@ -126,7 +126,7 @@ function Register-LetsEncryptCertificateRequest {
                     $DnsHost = -join ("$DnsHost", "$_", ".")
                 }
                 $DnsHost = ($DnsHost).Trim(".")
-                $NameServer = (Resolve-DnsName $DnsZone -Type NS).NameHost[0]
+                $NameServer = (Resolve-DnsName $DnsZone -Type NS -Server 8.8.8.8).NameHost[0]
 
                 # Build Object for Output
                 $CurrentACMEIdentifier = Get-ACMEIdentifier | Where-Object Alias -like $Alias

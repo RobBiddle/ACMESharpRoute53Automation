@@ -185,7 +185,7 @@ function Get-NewLetsEncryptCertificate {
     $R53RecordsToExclude = @()
     $R53Records | Select-Object ZoneName -Unique | ForEach-Object {
         $CurrentR53Record = $_
-        if ( (Resolve-DnsName $CurrentR53Record.ZoneName -Type NS).NameHost -notlike "*awsdns*" ) {
+        if ( (Resolve-DnsName $CurrentR53Record.ZoneName -Type NS -Server 8.8.8.8).NameHost -notlike "*awsdns*" ) {
             $R53RecordsToExclude += $CurrentR53Record
         }
     }
