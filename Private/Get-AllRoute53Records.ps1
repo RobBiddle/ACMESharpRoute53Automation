@@ -1,0 +1,53 @@
+<#
+.NOTES
+    Author: Robert D. Biddle
+    https://github.com/RobBiddle
+    https://github.com/RobBiddle/ACMESharpRoute53Automation
+    ACMESharpRoute53Automation  Copyright (C) 2017  Robert D. Biddle
+    This program comes with ABSOLUTELY NO WARRANTY; for details type `"help Get-NewLetsEncryptCertificate -full`".
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; for details type `"help Get-NewLetsEncryptCertificate -full`".
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    The GNU General Public License does not permit incorporating your program
+    into proprietary programs.  If your program is a subroutine library, you
+    may consider it more useful to permit linking proprietary applications with
+    the library.  If this is what you want to do, use the GNU Lesser General
+    Public License instead of this License.  But first, please read
+    <http://www.gnu.org/philosophy/why-not-lgpl.html>.
+.DESCRIPTION
+    This function retrieves all Route53 hosted zones and the records for each zone.
+#>
+Function Get-AllRoute53Records {
+    $Output = @()
+    $R53HostedZones = Get-R53HostedZones
+    $R53HostedZones | ForEach-Object {
+        $CurrentZone = $_
+        $ResourceRecords = (Get-R53ResourceRecordSet -HostedZoneId $_.ID -MaxItem 100).ResourceRecordSets
+        While($AWSHistory.LastServiceResponse.IsTruncated){
+            $NextResourceRecord = $AWSHistory.LastServiceResponse.NextRecordName
+            $ResourceRecords += (Get-R53ResourceRecordSet -HostedZoneId $_.ID -StartRecordName $NextResourceRecord -MaxItem 100).ResourceRecordSets
+        }
+        $ResourceRecords | ForEach-Object {
+            $obj = New-Object -TypeName psobject
+            $obj | Add-Member -NotePropertyName ZoneName -NotePropertyValue $CurrentZone.Name
+            $obj | Add-Member -NotePropertyName RecordName -NotePropertyValue $_.Name
+            $obj | Add-Member -NotePropertyName RecordType -NotePropertyValue $_.Type
+            $obj | Add-Member -NotePropertyName RecordValue -NotePropertyValue  $_.ResourceRecords.Value
+            $Output += $obj
+        }    
+    }
+    $Output
+}
