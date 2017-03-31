@@ -101,4 +101,5 @@ Get-NewLetsEncryptCertificate -DomainNames "fabrikam.net","contoso.com","www.acm
 
 #### License
 
-TODO: Write license
+GNU General Public License v3.0
+https://github.com/RobBiddle/ACMESharpRoute53Automation/LICENSE.txt
