@@ -98,7 +98,7 @@ Get-NewLetsEncryptCertificate -DomainNames "fabrikam.net","contoso.com","www.acm
 - Mad Props to [@ebekker](https://github.com/ebekker) for creating [ACMESharp](https://github.com/ebekker/ACMESharp) upon which this project **heavily** relies
 - The [AWSPowerShell](https://www.powershellgallery.com/packages/AWSPowerShell) Devs for supporting all of us PowerShell users
 - [LetsEncrypt](https://letsencrypt.org) Devs & Supporters for making SSL **Free** (As in :beer:) and accessible to everyone
-
+- [Upic Solutions](https://upicsolutions.org/) for sponsoring my time to develop this project.  This code is being used as part of our mission to help United Ways be the best community solution leaders, in an increasingly competitive environment, by providing state of the art business and technology solutions.
 #### License
 
 GNU General Public License v3.0
