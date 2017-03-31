@@ -54,7 +54,7 @@ PowerShell modules to automate the following into a single process:
       - ```PowerShell
         Set-AWSCredentials -AccessKey {AKIAIOSFODNN7EXAMPLE} -SecretKey {wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY} -StoreAs {MyProfileName}
         ```
-    - Run Get-NewLetsEncryptCertificate on an EC2 Instance which has an IAM Role assigned with an appropriate IAM Policy.  An example of a CloudFormation snippet with such a policy can be found at: https://github.com/RobBiddle/ACMESharpRoute53Automation/Route53.IAM.Policy.snippet.json.template
+    - Run Get-NewLetsEncryptCertificate on an EC2 Instance which has an IAM Role assigned with an appropriate IAM Policy.  An example of a CloudFormation snippet with such a policy can be found at: https://github.com/RobBiddle/ACMESharpRoute53Automation/blob/master/Route53.IAM.Policy.snippet.json.template
 
 ###### Import the ACMESharpRoute53Automation module
 ```PowerShell
