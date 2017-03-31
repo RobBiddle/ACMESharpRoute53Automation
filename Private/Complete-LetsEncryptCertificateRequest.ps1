@@ -87,20 +87,20 @@ function Complete-LetsEncryptCertificateRequest {
             $BackOffSeconds = $null
             $TxtStrings = $null
             Write-Output "Attempting to Resolve: $($CurrentRecord.ChallengeRecordName)"
-            foreach ($n in (1 .. 11)) {
+            foreach ($n in (1 .. 10)) {
                 $BackOffSeconds = [Math]::Pow(2, $n)
                 $TxtStrings = (Resolve-DnsName -Name $CurrentRecord.ChallengeRecordName -Type TXT -Server $CurrentRecord.ChallengeRecordDnsServer -ErrorAction SilentlyContinue).Strings
                 if ($TxtStrings -like $CurrentRecord.ChallengeRecordValue) {
                     Start-Sleep -Seconds 1 # Submit-ACMEChallenge was throwing errors if proceeding too quickly after first successful name resolution
                     Return "Successfully Resolved: $($CurrentRecord.ChallengeRecordName)"
                 }
-                if ($BackOffSeconds -gt 1800) {
+                if ($BackOffSeconds -gt 600) {
                     Throw "Timed out waiting for Challenge Response TXT record resolution"
                 }
                 Write-Output "$($CurrentRecord.ChallengeRecordName) has not resolved...Waiting for $BackOffSeconds Seconds"
                 Start-Sleep -Seconds $BackOffSeconds
             }
-        }            
+        }
         # ALL Domains should now be albe to complete LetsEncrypt Challenges
         $InputObject | ForEach-Object {
             $CurrentIdentifier = $_
@@ -109,7 +109,7 @@ function Complete-LetsEncryptCertificateRequest {
                 Update-ACMEIdentifier $CurrentIdentifier.Alias -ChallengeType 'dns-01'
             }
             $BackOffSeconds = $null
-            foreach ($n in (1 .. 17)) {
+            foreach ($n in (1 .. 10)) {
                 $BackOffSeconds = [Math]::Pow(2, $n)
                 if (!(Get-ACMEIdentifier | Where-Object Status -like "pending" | Where-Object Alias -like "*$AliasSalt")) {
                     Return
@@ -120,7 +120,7 @@ function Complete-LetsEncryptCertificateRequest {
                         Update-ACMEIdentifier $_.Alias
                     }
                 }
-                if ($BackOffSeconds -gt 43200) {
+                if ($BackOffSeconds -gt 600) {
                     Throw "Timed out waiting for Domain Validation"
                 }
                 Else {
@@ -182,7 +182,7 @@ function Complete-LetsEncryptCertificateRequest {
             $CurrentCert = $_
             # Wait for Certificate using exponential backoff 
             $BackOffSeconds = $null
-            foreach ($n in (1 .. 17)) {
+            foreach ($n in (1 .. 10)) {
                 $BackOffSeconds = [Math]::Pow(2, $n)                
                 if ((Get-ACMECertificate | Where-Object Alias -like $CurrentCert.Alias).SerialNumber) {
                     Return
@@ -192,7 +192,7 @@ function Complete-LetsEncryptCertificateRequest {
                         Update-ACMECertificate $_.Alias
                     }
                 }
-                if ($BackOffSeconds -gt 43200) {
+                if ($BackOffSeconds -gt 600) {
                     Throw "Timed out waiting for certificate"
                 }
                 Else {
