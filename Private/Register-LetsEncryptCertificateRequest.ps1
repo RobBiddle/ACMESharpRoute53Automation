@@ -77,10 +77,10 @@ function Register-LetsEncryptCertificateRequest {
         if ($pscmdlet.ParameterSetName -like "Staging") {
             Write-Warning "Staging Mode --- Using ACMESharp BaseService LetsEncrypt-STAGING --- Certificates Are For Testing Purposes!"
             if (!(Get-ACMEVault)) {
-                Initialize-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging | Out-Null
+                Initialize-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging
             }
             Else {
-                Set-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging | Out-Null
+                Set-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging
             }
         }
         if ($pscmdlet.ParameterSetName -like "Production") {
@@ -88,15 +88,15 @@ function Register-LetsEncryptCertificateRequest {
             Write-Warning "Actions Will Count Against LetsEncrypt Limits!!!"
             Write-Warning "See https://letsencrypt.org/docs/rate-limits/ for details"
             if (!(Get-ACMEVault)) {
-                Initialize-ACMEVault -BaseService LetsEncrypt -Alias Production | Out-Null
+                Initialize-ACMEVault -BaseService LetsEncrypt -Alias Production 
             }
             Else {
-                Set-ACMEVault -BaseService LetsEncrypt -Alias Production | Out-Null
+                Set-ACMEVault -BaseService LetsEncrypt -Alias Production
             }
         }        
         # Create LetsEncrypt Registration if necessary
         if (!(Get-ACMERegistration | Where-Object Contacts -like "*$Contacts*")) {
-            New-ACMERegistration -Contacts "mailto:$Contacts" -AcceptTos | Out-Null
+            New-ACMERegistration -Contacts "mailto:$Contacts" -AcceptTos
         }
         # Generate a DateTime String to use as an Alias Salt for this run
         $AliasSalt = Get-Date -Format FileDateTime
