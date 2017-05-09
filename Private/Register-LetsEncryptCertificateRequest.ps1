@@ -42,8 +42,8 @@ function Register-LetsEncryptCertificateRequest {
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
             ValueFromRemainingArguments = $false)]
-        [Parameter(ParameterSetName = "Production")]
-        [Parameter(ParameterSetName = "Staging")]
+        # [Parameter(ParameterSetName = "Production")]
+        # [Parameter(ParameterSetName = "Staging")]
         [ValidateNotNullOrEmpty()]
         [String[]]
         $DomainNames,
@@ -61,7 +61,7 @@ function Register-LetsEncryptCertificateRequest {
         $ChallengeType = 'dns-01',
 
         # Switch to LetEncrypt Staging instead of Production
-        [Parameter(ParameterSetName = "Staging")]
+        # [Parameter(ParameterSetName = "Staging")]
         [Switch]
         $Staging
     )    
@@ -74,21 +74,23 @@ function Register-LetsEncryptCertificateRequest {
             Import-Module ACMESharp -ErrorAction SilentlyContinue
         }
         # Set ACMESharp Vault to Staging or Production by ParameterSetName 
-        if ($pscmdlet.ParameterSetName -like "Staging") {
+        #if ($pscmdlet.ParameterSetName -like "Staging") {
+        if ($Staging) {
             Write-Warning "Staging Mode --- Using ACMESharp BaseService LetsEncrypt-STAGING --- Certificates Are For Testing Purposes!"
             if (!(Get-ACMEVault)) {
-                Initialize-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging
+                Initialize-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging -Force
             }
             Else {
                 Set-ACMEVault -BaseService LetsEncrypt-STAGING -Alias Staging
             }
         }
-        if ($pscmdlet.ParameterSetName -like "Production") {
+        # if ($pscmdlet.ParameterSetName -like "Production") {
+        if (!($Staging)) {
             Write-Warning "Production Mode --- Using ACMESharp BaseService LetsEncrypt --- Certificates Are Valid for Production Use"
             Write-Warning "Actions Will Count Against LetsEncrypt Limits!!!"
             Write-Warning "See https://letsencrypt.org/docs/rate-limits/ for details"
             if (!(Get-ACMEVault)) {
-                Initialize-ACMEVault -BaseService LetsEncrypt -Alias Production 
+                Initialize-ACMEVault -BaseService LetsEncrypt -Alias Production -Force
             }
             Else {
                 Set-ACMEVault -BaseService LetsEncrypt -Alias Production

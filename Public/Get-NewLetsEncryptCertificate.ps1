@@ -95,16 +95,16 @@ function Get-NewLetsEncryptCertificate {
     [OutputType([System.Management.Automation.PSCustomObject])]
     Param (
         # Get Certificates for ALL 'A' & 'CNAME' Records in ALL Route53 Hosted Zones
-        [Parameter(ParameterSetName = "Staging-ALL")]
-        [Parameter(ParameterSetName = "Production-ALL")]
+        #[Parameter(ParameterSetName = "Staging-ALL")]
+        #[Parameter(ParameterSetName = "Production-ALL")]
         [Switch]
         $ALL,
 
         # Switch to LetEncrypt Staging instead of Production
-        [Parameter(ParameterSetName = "Staging")]
-        [Parameter(ParameterSetName = "Staging-ALL")]
-        [Parameter(ParameterSetName = "Staging-NAME")]
-        [Parameter(ParameterSetName = "Staging-ZONE")]
+        # [Parameter(ParameterSetName = "Staging")]
+        # [Parameter(ParameterSetName = "Staging-ALL")]
+        # [Parameter(ParameterSetName = "Staging-NAME")]
+        # [Parameter(ParameterSetName = "Staging-ZONE")]
         [Switch]
         $Staging,
 
@@ -113,8 +113,8 @@ function Get-NewLetsEncryptCertificate {
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
             ValueFromRemainingArguments = $false)]
-        [Parameter(ParameterSetName = "Production-ZONE")]
-        [Parameter(ParameterSetName = "Staging-ZONE")]
+        # [Parameter(ParameterSetName = "Production-ZONE")]
+        # [Parameter(ParameterSetName = "Staging-ZONE")]
         [String[]]
         $ZoneNames,
 
@@ -123,8 +123,8 @@ function Get-NewLetsEncryptCertificate {
             ValueFromPipeline = $true,
             ValueFromPipelineByPropertyName = $true,
             ValueFromRemainingArguments = $false)]
-        [Parameter(ParameterSetName = "Production-NAME")]
-        [Parameter(ParameterSetName = "Staging-NAME")]
+        # [Parameter(ParameterSetName = "Production-NAME")]
+        # [Parameter(ParameterSetName = "Staging-NAME")]
         [String[]]
         $DomainNames,
 
