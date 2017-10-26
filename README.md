@@ -20,13 +20,13 @@ PowerShell modules to automate the following into a single process:
 - Exports Certificates files
 
 #### Table of Contents
-- [Install](/#Install)
-- [Usage](/#Install)
-- [Maintainer\(s\)](/#Maintainer\(s\))
-- [Credits](Credits)
-- [License](License)
+- [Install](#Install)
+- [Usage](#Usage)
+- [Maintainer\(s\)](#Maintainer)
+- [Credits](#Credits)
+- [License](#License)
 
-#### Install
+#### Install <a name="Install"></a>
 - ###### Install PowerShell
   - [ACMESharpRoute53Automation](https://github.com/RobBiddle/ACMESharpRoute53Automation) should be compatible with PowerShell 3.0 and higher, howerver I still suggest using the latest verison of [PowerShell](https://aka.ms/wmf5latest) if possible so that you can use PowerShellGet cmdlets
   Download the latest PowerShell here: https://aka.ms/wmf5latest
@@ -46,7 +46,7 @@ PowerShell modules to automate the following into a single process:
       Install-Module ACMESharpRoute53Automation
       ```
 
-#### Usage
+#### Usage <a name="Usage"></a>
 ###### [Route53](https://aws.amazon.com/route53/) Requirements:
   - You will need to have permissions to read [Route53](https://aws.amazon.com/route53/) Hosted Zones and write to ResourceRecordSets
   - This can be accomplished in multiple ways:
@@ -60,7 +60,7 @@ PowerShell modules to automate the following into a single process:
 ```PowerShell
 Import-Module ACMESharpRoute53Automation
 ```
-
+<a name="Example"></a>
 ###### Example: -ALL
 This Example would generate SSL Certificates via [LetsEncrypt](https://letsencrypt.org) for ALL of your [Route53](https://aws.amazon.com/route53/) A & CNAME records in ALL of your [Route53](https://aws.amazon.com/route53/) Hosted Zones. One SAN Certificate would be generated per zone, containing all of the records for that zone.
 
@@ -83,10 +83,10 @@ This Example would end up generating 3 SSL Certificates, 1 for fabrikam.net, 1 f
 Get-NewLetsEncryptCertificate -DomainNames "fabrikam.net","contoso.com","www.acme.net","app2.contoso.com" -Contacts "me@privacy.net"
 ```
 
-#### Maintainer(s)
+#### Maintainer(s) <a name="Maintainer"></a>
 [Robert D. Biddle](https://github.com/RobBiddle) - https://github.com/RobBiddle
 
-#### Contributing
+#### Contributing <a name="Contributing"></a>
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -94,12 +94,12 @@ Get-NewLetsEncryptCertificate -DomainNames "fabrikam.net","contoso.com","www.acm
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-#### Credits
+#### Credits <a name="Credits"></a>
 - Mad Props to [@ebekker](https://github.com/ebekker) for creating [ACMESharp](https://github.com/ebekker/ACMESharp) upon which this project **heavily** relies
 - The [AWSPowerShell](https://www.powershellgallery.com/packages/AWSPowerShell) Devs for supporting all of us PowerShell users
 - [LetsEncrypt](https://letsencrypt.org) Devs & Supporters for making SSL **Free** (As in :beer:) and accessible to everyone
 - [Upic Solutions](https://upicsolutions.org/) for sponsoring my time to develop this project.  This code is being used as part of our mission to help United Ways be the best community solution leaders, in an increasingly competitive environment, by providing state of the art business and technology solutions.
-#### License
+#### License <a name="License"></a>
 
 GNU General Public License v3.0
 https://github.com/RobBiddle/ACMESharpRoute53Automation/LICENSE.txt
