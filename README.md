@@ -25,6 +25,7 @@ PowerShell modules to automate the following into a single process:
 - [Maintainer\(s\)](#Maintainer)
 - [Credits](#Credits)
 - [License](#License)
+- [Support](#Support)
 
 #### Install <a name="Install"></a>
 - ###### Install PowerShell
@@ -99,7 +100,15 @@ Get-NewLetsEncryptCertificate -DomainNames "fabrikam.net","contoso.com","www.acm
 - The [AWSPowerShell](https://www.powershellgallery.com/packages/AWSPowerShell) Devs for supporting all of us PowerShell users
 - [LetsEncrypt](https://letsencrypt.org) Devs & Supporters for making SSL **Free** (As in :beer:) and accessible to everyone
 - [Upic Solutions](https://upicsolutions.org/) for sponsoring my time to develop this project.  This code is being used as part of our mission to help United Ways be the best community solution leaders, in an increasingly competitive environment, by providing state of the art business and technology solutions.
+
 #### License <a name="License"></a>
 
 GNU General Public License v3.0
 https://github.com/RobBiddle/ACMESharpRoute53Automation/LICENSE.txt
+
+##### Support <a name="Support"></a>
+- Please Star this repo if you found some of this code useful!
+- If you're an unbelievably nice person and want to show your appreciation, I like beer ;-)
+  - Send me beer money via LTC: MHJj5jaWFU2VeqEZXnLC4xaZdQ1Nu9NC48
+  - Send me beer money via BTC: 38ieXk9rn2LJEsfimFWiyycUZZv5ABJPqM
+  - Send me beer money via USD: https://paypal.me/RobertBiddle
