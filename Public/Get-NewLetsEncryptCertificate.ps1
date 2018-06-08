@@ -193,10 +193,10 @@ function Get-NewLetsEncryptCertificate {
     # Determine which records to process
     $HostAndZoneList = @()
     if ($ZoneNames) {
-        $NamesToMatch = $ZoneNames
+        $NamesToMatch = ($R53Records | Where-Object ZoneName -in $ZoneNames).RecordName
     }
     if ($DomainNames) {
-        $NamesToMatch = $DomainNames
+        $NamesToMatch = ($R53Records | Where-Object ZoneName -in $DomainNames).RecordName
     }
     if ($ALL) {
         $NamesToMatch = $R53Records.RecordName
