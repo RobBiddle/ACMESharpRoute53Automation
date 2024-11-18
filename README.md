@@ -1,4 +1,5 @@
 # ACMESharpRoute53Automation
+![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/ACMESharpRoute53Automation)
 #### Synopsis
 >[ACMESharpRoute53Automation](https://github.com/RobBiddle/ACMESharpRoute53Automation) is a PowerShell module which automates the ACMESharp process of obtaining SSL certificates from [LetsEncrypt.org](https://letsencrypt.org) using Amazon AWS [Route53](https://aws.amazon.com/route53/) to enable the DNS Domain Validation method
 #### Description
